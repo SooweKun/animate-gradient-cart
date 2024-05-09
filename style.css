@@ -1,0 +1,58 @@
+:root {
+    --clr-1: #FF1493;
+    --clr-2: #8B008B;
+    --clr-3: #FF00FF;
+    --clr-4: #4B0082;
+    --clr-5: #9370DB;
+}
+
+body {
+    background-color: black;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+.card {
+    height: 60vh;
+    aspect-ratio: 1 / 1.5;
+    background: rgb(80, 75, 75);
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+@property --gradient-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotation {
+    0% {
+        --gradient-angle: 0deg;
+    }
+
+    100% {
+        --gradient-angle: 360deg;
+    }
+}
+
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    inset: -.5rem;
+    z-index: -1;
+    background: linear-gradient(var(--gradient-angle),
+            var(--clr-1),
+            var(--clr-3),
+            var(--clr-2),
+            var(--clr-5),
+            var(--clr-4));
+    animation: rotation 15s linear infinite;
+    border-radius: inherit;
+}
+
+.card::after {
+    filter: blur(3.5rem);
+}
